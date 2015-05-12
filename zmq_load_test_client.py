@@ -32,10 +32,19 @@ if __name__ == '__main__':
   receiver.connect('tcp://192.168.14.204:5557')
   receiver.setsockopt_string(zmq.SUBSCRIBE, 'measurement_start')
 
+  print('receiver connected')
+
   sender = ctx.socket(zmq.PUSH)
   sender.connect('tcp://192.168.14.204:5558')
 
+  print('sender connected')
+
   while True:
-    _, params = demogrify(receiver.recv_string())
+    topicmsg = receiver.recv_string()
+    print('data received')
+
+    _, params = demogrify(topicmsg)
+
     comm_time = measurement(params)
     sender.send_string(str(comm_time))
+    print('result sent')

@@ -27,5 +27,6 @@ Thread(target=senderThread).start()
 res = []
 for _ in range(int(sys.argv[1])):
   res.append(receiver.recv_string())
+  print('result received')
 
 print(max(map(float, res)))
