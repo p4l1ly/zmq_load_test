@@ -8,7 +8,7 @@ def demogrify(topicmsg):
     return topic, msg
 
 def measurement(params):
-  tic = time.clock()
+  tic = time.time()
 
   ps = []
   for i in range(int(params['processes'])):
@@ -23,7 +23,7 @@ def measurement(params):
   for p in ps:
     p.wait()
 
-  return time.clock() - tic
+  return time.time() - tic
 
 if __name__ == '__main__':
   ctx = zmq.Context()
