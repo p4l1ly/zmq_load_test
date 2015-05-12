@@ -1,4 +1,4 @@
-import subprocess, time, zmq, json
+import subprocess, time, zmq, json, os
 
 def demogrify(topicmsg):
     """ Inverse of mogrify() """
@@ -29,13 +29,13 @@ if __name__ == '__main__':
   ctx = zmq.Context()
 
   receiver = ctx.socket(zmq.SUB)
-  receiver.connect('tcp://192.168.14.204:5557')
+  receiver.connect('tcp://{}:5557'.format(os.environ['STARTER_IP']))
   receiver.setsockopt_string(zmq.SUBSCRIBE, 'measurement_start')
 
   print('receiver connected')
 
   sender = ctx.socket(zmq.PUSH)
-  sender.connect('tcp://192.168.14.204:5558')
+  sender.connect('tcp://{}:5558'.format(os.environ['STARTER_IP']))
 
   print('sender connected')
 
