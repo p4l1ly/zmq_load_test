@@ -13,10 +13,10 @@ def measurement(params):
   ps = []
   for i in range(int(params['processes'])):
     ps.append(
-      subprocess.Popen(['python3', 'zmq_load_test.py',
-                        str(int(params['sockets'])),
-                        str(int(params['messages'])),
-                        str(int(params['max_length']))
+      subprocess.Popen([ 'python3', 'zmq_load_test.py'
+                       , str(int(params['sockets']))
+                       , str(int(params['messages']))
+                       , str(int(params['max_length']))
                        ])
     )
 
