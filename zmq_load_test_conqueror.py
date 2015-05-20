@@ -1,4 +1,4 @@
-import subprocess, time, zmq, json
+import subprocess, time, zmq, json, sys
 from threading import Thread
 
 def mogrify(topic, msg):
@@ -24,7 +24,7 @@ def senderThread():
 Thread(target=senderThread).start()
 
 res = []
-for _ in range(4):
+for _ in range(int(sys.argv[1])):
   res.append(receiver.recv_string())
 
 print(max(map(float, res)))
